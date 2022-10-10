@@ -1,0 +1,31 @@
+{
+  "name": "pil-lfsr",
+  "version": "0.0.1",
+  "description": "Implementation of a Linear-Feedback Shift Register (LFSR) in PIL.",
+  "main": "index.js",
+  "scripts": {
+    "smcompile": "pilcom src/lfsr.pil -o build/lfsr.json ",
+    "buildconst": "node src/main_buildconst.js -o build/lfsr.const.bin",
+    "buildcommit": "node src/main_buildcommit.js -i src/input.json -o build/lfsr.commit.bin",
+    "starksetup": "node node_modules/pil-stark/src/main_buildconsttree.js -c build/lfsr.const.bin -p src/lfsr.pil -s src/starkstruct.json -t build/lfsr.consttree.bin -v build/lfsr.verkey.json",
+    "starkprove": "node node_modules/pil-stark/src/main_prover.js -m build/lfsr.commit.bin -c build/lfsr.const.bin -t build/lfsr.consttree.bin -p src/lfsr.pil -s src/starkstruct.json -o build/lfsr-proof.json -z build/lfsr-proof.zkin.json -b build/lfsr-public.json",
+    "starkverify": "node node_modules/pil-stark/src/main_verifier.js -p src/lfsr.pil -s src/starkstruct.json -v build/lfsr.verkey.json -o build/lfsr-proof.json -b build/lfsr-public.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hecmas/pil-lfsr.git"
+  },
+  "author": "Héctor Masip Ardevol",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hecmas/pil-lfsr/issues"
+  },
+  "homepage": "https://github.com/hecmas/pil-lfsr#readme",
+  "dependencies": {
+    "pil-stark": "^0.0.27"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "yargs": "^17.6.0"
+  }
+}
