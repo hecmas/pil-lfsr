@@ -5,26 +5,29 @@ namespace LFSR(%N);
 
     pol constant ISBEFORELAST;   // 0, 0, ..., 0, 1, 0
 
+    ISBEFORELAST * (1 - ISBEFORELAST) = 0;
+
     // LFSR configuration (taps) taken from https://en.wikipedia.org/wiki/Linear-feedback_shift_register#Example_polynomials_for_maximal_LFSRs
     // p(X) = X^10 + X^7 + 1
-    state0' = state9 + state6 - 2*state9*state6; 
-    state1' = state0;
-    state2' = state1;
-    state3' = state2;
-    state4' = state3;
-    state5' = state4;
-    state6' = state5;
-    state7' = state6;
-    state8' = state7;
-    state9' = state8;
+    pol mul96 = state9 * state6;
+    (1 - ISBEFORELAST) * (state0' - state9 - state6 + 2*mul96) = 0; 
+    (1 - ISBEFORELAST) * (state1' - state0) = 0;
+    (1 - ISBEFORELAST) * (state2' - state1) = 0;
+    (1 - ISBEFORELAST) * (state3' - state2) = 0;
+    (1 - ISBEFORELAST) * (state4' - state3) = 0;
+    (1 - ISBEFORELAST) * (state5' - state4) = 0;
+    (1 - ISBEFORELAST) * (state6' - state5) = 0;
+    (1 - ISBEFORELAST) * (state7' - state6) = 0;
+    (1 - ISBEFORELAST) * (state8' - state7) = 0;
+    (1 - ISBEFORELAST) * (state9' - state8) = 0;
 
-    ISBEFORELAST * state0' = state0;
-    ISBEFORELAST * state1' = state1;
-    ISBEFORELAST * state2' = state2;
-    ISBEFORELAST * state3' = state3;
-    ISBEFORELAST * state4' = state4;
-    ISBEFORELAST * state5' = state5;
-    ISBEFORELAST * state6' = state6;
-    ISBEFORELAST * state7' = state7;
-    ISBEFORELAST * state8' = state8;
-    ISBEFORELAST * state9' = state9;
+    ISBEFORELAST * (state0' - state0) = 0;
+    ISBEFORELAST * (state1' - state1) = 0;
+    ISBEFORELAST * (state2' - state2) = 0;
+    ISBEFORELAST * (state3' - state3) = 0;
+    ISBEFORELAST * (state4' - state4) = 0;
+    ISBEFORELAST * (state5' - state5) = 0;
+    ISBEFORELAST * (state6' - state6) = 0;
+    ISBEFORELAST * (state7' - state7) = 0;
+    ISBEFORELAST * (state8' - state8) = 0;
+    ISBEFORELAST * (state9' - state9) = 0;

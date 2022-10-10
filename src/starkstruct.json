@@ -1,7 +1,7 @@
 {
     "nBits": 10,
     "nBitsExt": 12,
-    "nQueries": 16,
+    "nQueries": 64,
     "verificationHashType": "GL",
     "steps": [
         {"nBits": 12},

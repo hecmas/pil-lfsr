@@ -4,9 +4,10 @@
   "description": "Implementation of a Linear-Feedback Shift Register (LFSR) in PIL.",
   "main": "index.js",
   "scripts": {
-    "smcompile": "pilcom src/lfsr.pil -o build/lfsr.json ",
+    "smcompile": "node node_modules/pilcom/src/pil.js src/lfsr.pil -o build/lfsr.json ",
     "buildconst": "node src/main_buildconst.js -o build/lfsr.const.bin",
     "buildcommit": "node src/main_buildcommit.js -i src/input.json -o build/lfsr.commit.bin",
+    "pilverify": "node node_modules/pilcom/src/main_pilverifier.js build/lfsr.commit.bin -p src/lfsr.pil -c build/lfsr.const.bin",
     "starksetup": "node node_modules/pil-stark/src/main_buildconsttree.js -c build/lfsr.const.bin -p src/lfsr.pil -s src/starkstruct.json -t build/lfsr.consttree.bin -v build/lfsr.verkey.json",
     "starkprove": "node node_modules/pil-stark/src/main_prover.js -m build/lfsr.commit.bin -c build/lfsr.const.bin -t build/lfsr.consttree.bin -p src/lfsr.pil -s src/starkstruct.json -o build/lfsr-proof.json -z build/lfsr-proof.zkin.json -b build/lfsr-public.json",
     "starkverify": "node node_modules/pil-stark/src/main_verifier.js -p src/lfsr.pil -s src/starkstruct.json -v build/lfsr.verkey.json -o build/lfsr-proof.json -b build/lfsr-public.json"
@@ -22,7 +23,8 @@
   },
   "homepage": "https://github.com/hecmas/pil-lfsr#readme",
   "dependencies": {
-    "pil-stark": "^0.0.27"
+    "pil-stark": "^0.0.27",
+    "pilcom": "^0.0.18"
   },
   "devDependencies": {
     "chai": "^4.3.6",

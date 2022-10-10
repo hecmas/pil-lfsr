@@ -22,9 +22,8 @@ module.exports.execute = async function (pols, input) {
     pols.state8[0] = BigInt(input[8]);
     pols.state9[0] = BigInt(input[9]);
 
-    const start_state = [pols.state0[0], pols.state1[0], pols.state2[0], pols.state3[0], pols.state4[0], pols.state5[0], pols.state6[0], pols.state7[0], pols.state8[0], pols.state9[0]];
-    let period = 0;
-    // Finish checking the period
+    const start_state = [pols.state0[0], pols.state1[0], pols.state2[0], pols.state3[0], pols.state4[0], pols.state5[0], pols.state6[0], pols.state7[0], pols.state8[0], pols.state9[0]].join("");
+    let period = 1;
 
     for (let i = 1; i < N-1; i++) {
         pols.state0[i] = pols.state9[i - 1] + pols.state6[i-1] - BigInt(2)*pols.state9[i-1]*pols.state6[i-1];
@@ -37,6 +36,13 @@ module.exports.execute = async function (pols, input) {
         pols.state7[i] = pols.state6[i-1];
         pols.state8[i] = pols.state7[i-1];
         pols.state9[i] = pols.state8[i-1];
+        let intermediate_state = [pols.state0[i], pols.state1[i], pols.state2[i], pols.state3[i], pols.state4[i], pols.state5[i], pols.state6[i], pols.state7[i], pols.state8[i], pols.state9[i]].join("");
+        
+        // Sanity check
+        if (intermediate_state == start_state) {
+            console.log("Period found at " + i);
+            break;
+        }
         period++;
     }
 
@@ -52,6 +58,6 @@ module.exports.execute = async function (pols, input) {
     pols.state9[N-1] = pols.state9[N-2];
 
     // TBD: What should I output?
-    const result = [pols.state0[N-1], pols.state1[N-1], pols.state2[N-1], pols.state3[N-1], pols.state4[N-1], pols.state5[N-1], pols.state6[N-1], pols.state7[N-1], pols.state8[N-1], pols.state9[N-1]];
-    return [result.join(""), period];
+    const final_state = [pols.state0[N-1], pols.state1[N-1], pols.state2[N-1], pols.state3[N-1], pols.state4[N-1], pols.state5[N-1], pols.state6[N-1], pols.state7[N-1], pols.state8[N-1], pols.state9[N-1]].join("");
+    return [final_state, period];
 };
