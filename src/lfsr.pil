@@ -1,7 +1,7 @@
-constant %N = 2**10;
+include "config.pil";
 
 namespace LFSR(%N);
-    pol commit state0, state1, state2, state3, state4, state5, state6, state7, state8, state9;
+    pol commit state[10];
 
     pol constant ISBEFORELAST;   // 0, 0, ..., 0, 1, 0
 
@@ -9,25 +9,25 @@ namespace LFSR(%N);
 
     // LFSR configuration (taps) taken from https://en.wikipedia.org/wiki/Linear-feedback_shift_register#Example_polynomials_for_maximal_LFSRs
     // p(X) = X^10 + X^7 + 1
-    pol mul96 = state9 * state6;
-    (1 - ISBEFORELAST) * (state0' - state9 - state6 + 2*mul96) = 0; 
-    (1 - ISBEFORELAST) * (state1' - state0) = 0;
-    (1 - ISBEFORELAST) * (state2' - state1) = 0;
-    (1 - ISBEFORELAST) * (state3' - state2) = 0;
-    (1 - ISBEFORELAST) * (state4' - state3) = 0;
-    (1 - ISBEFORELAST) * (state5' - state4) = 0;
-    (1 - ISBEFORELAST) * (state6' - state5) = 0;
-    (1 - ISBEFORELAST) * (state7' - state6) = 0;
-    (1 - ISBEFORELAST) * (state8' - state7) = 0;
-    (1 - ISBEFORELAST) * (state9' - state8) = 0;
+    pol mul96 = state[9] * state[6];
+    (1 - ISBEFORELAST) * (state[0]' - state[9] - state[6] + 2*mul96) = 0; 
+    (1 - ISBEFORELAST) * (state[1]' - state[0]) = 0;
+    (1 - ISBEFORELAST) * (state[2]' - state[1]) = 0;
+    (1 - ISBEFORELAST) * (state[3]' - state[2]) = 0;
+    (1 - ISBEFORELAST) * (state[4]' - state[3]) = 0;
+    (1 - ISBEFORELAST) * (state[5]' - state[4]) = 0;
+    (1 - ISBEFORELAST) * (state[6]' - state[5]) = 0;
+    (1 - ISBEFORELAST) * (state[7]' - state[6]) = 0;
+    (1 - ISBEFORELAST) * (state[8]' - state[7]) = 0;
+    (1 - ISBEFORELAST) * (state[9]' - state[8]) = 0;
 
-    ISBEFORELAST * (state0' - state0) = 0;
-    ISBEFORELAST * (state1' - state1) = 0;
-    ISBEFORELAST * (state2' - state2) = 0;
-    ISBEFORELAST * (state3' - state3) = 0;
-    ISBEFORELAST * (state4' - state4) = 0;
-    ISBEFORELAST * (state5' - state5) = 0;
-    ISBEFORELAST * (state6' - state6) = 0;
-    ISBEFORELAST * (state7' - state7) = 0;
-    ISBEFORELAST * (state8' - state8) = 0;
-    ISBEFORELAST * (state9' - state9) = 0;
+    ISBEFORELAST * (state[0]' - state[0]) = 0;
+    ISBEFORELAST * (state[1]' - state[1]) = 0;
+    ISBEFORELAST * (state[2]' - state[2]) = 0;
+    ISBEFORELAST * (state[3]' - state[3]) = 0;
+    ISBEFORELAST * (state[4]' - state[4]) = 0;
+    ISBEFORELAST * (state[5]' - state[5]) = 0;
+    ISBEFORELAST * (state[6]' - state[6]) = 0;
+    ISBEFORELAST * (state[7]' - state[7]) = 0;
+    ISBEFORELAST * (state[8]' - state[8]) = 0;
+    ISBEFORELAST * (state[9]' - state[9]) = 0;

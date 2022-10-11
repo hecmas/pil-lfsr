@@ -4,7 +4,7 @@
   "description": "Implementation of a Linear-Feedback Shift Register (LFSR) in PIL.",
   "main": "index.js",
   "scripts": {
-    "smcompile": "node node_modules/pilcom/src/pil.js src/lfsr.pil -o build/lfsr.json ",
+    "smcompile": "mkdir -p build && node node_modules/pilcom/src/pil.js src/lfsr.pil -o build/lfsr.json ",
     "buildconst": "node src/main_buildconst.js -o build/lfsr.const.bin",
     "buildcommit": "node src/main_buildcommit.js -i src/input.json -o build/lfsr.commit.bin",
     "pilverify": "node node_modules/pilcom/src/main_pilverifier.js build/lfsr.commit.bin -p src/lfsr.pil -c build/lfsr.const.bin",
