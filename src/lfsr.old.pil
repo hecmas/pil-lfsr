@@ -1,6 +1,6 @@
 include "config.pil";
 
-namespace LFSR(%N);
+namespace OLDLFSR(%N);
     pol commit state0, state1, state2, state3, state4, state5, state6, state7, state8, state9;
 
     pol constant ISBEFORELAST;   // 0, 0, ..., 0, 1, 0

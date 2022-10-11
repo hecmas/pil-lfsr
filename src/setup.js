@@ -1,5 +1,3 @@
-const { FGL } = require("pil-stark");
-
 module.exports.buildConstants = async function (pols) {
     const N = pols.ISBEFORELAST.length;
 

@@ -1,16 +1,50 @@
 include "config.pil";
+include "xor.pil";
 
+// TODO: Check that period is correct
 namespace LFSR(%N);
+    pol commit taps[10];
     pol commit state[10];
+    pol commit xor;
 
     pol constant ISBEFORELAST;   // 0, 0, ..., 0, 1, 0
 
+    taps[0] * (1 - taps[0]) = 0;
+    taps[1] * (1 - taps[1]) = 0;
+    taps[2] * (1 - taps[2]) = 0;
+    taps[3] * (1 - taps[3]) = 0;
+    taps[4] * (1 - taps[4]) = 0;
+    taps[5] * (1 - taps[5]) = 0;
+    taps[6] * (1 - taps[6]) = 0;
+    taps[7] * (1 - taps[7]) = 0;
+    taps[8] * (1 - taps[8]) = 0;
+    taps[9] * (1 - taps[9]) = 0;
+
+    taps[0]' = taps[0];
+    taps[1]' = taps[1];
+    taps[2]' = taps[2];
+    taps[3]' = taps[3];
+    taps[4]' = taps[4];
+    taps[5]' = taps[5];
+    taps[6]' = taps[6];
+    taps[7]' = taps[7];
+    taps[8]' = taps[8];
+    taps[9]' = taps[9];
+
+    state[0] * (1 - state[0]) = 0;
+    state[1] * (1 - state[1]) = 0;
+    state[2] * (1 - state[2]) = 0;
+    state[3] * (1 - state[3]) = 0;
+    state[4] * (1 - state[4]) = 0;
+    state[5] * (1 - state[5]) = 0;
+    state[6] * (1 - state[6]) = 0;
+    state[7] * (1 - state[7]) = 0;
+    state[8] * (1 - state[8]) = 0;
+    state[9] * (1 - state[9]) = 0;
+
     ISBEFORELAST * (1 - ISBEFORELAST) = 0;
 
-    // LFSR configuration (taps) taken from https://en.wikipedia.org/wiki/Linear-feedback_shift_register#Example_polynomials_for_maximal_LFSRs
-    // p(X) = X^10 + X^7 + 1
-    pol mul96 = state[9] * state[6];
-    (1 - ISBEFORELAST) * (state[0]' - state[9] - state[6] + 2*mul96) = 0; 
+    (1 - ISBEFORELAST) * (state[0]' - xor) = 0; 
     (1 - ISBEFORELAST) * (state[1]' - state[0]) = 0;
     (1 - ISBEFORELAST) * (state[2]' - state[1]) = 0;
     (1 - ISBEFORELAST) * (state[3]' - state[2]) = 0;
@@ -31,3 +65,8 @@ namespace LFSR(%N);
     ISBEFORELAST * (state[7]' - state[7]) = 0;
     ISBEFORELAST * (state[8]' - state[8]) = 0;
     ISBEFORELAST * (state[9]' - state[9]) = 0;
+
+    {taps[0]*state[0], taps[1]*state[1], taps[2]*state[2], taps[3]*state[3], taps[4]*state[4], 
+     taps[5]*state[5], taps[6]*state[6], taps[7]*state[7], taps[8]*state[8], taps[9]*state[9], xor} in 
+    {XOR.input0, XOR.input1, XOR.input2, XOR.input3, XOR.input4, 
+     XOR.input5, XOR.input6, XOR.input7, XOR.input8, XOR.input9, XOR.output};
