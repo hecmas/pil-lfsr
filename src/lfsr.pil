@@ -1,5 +1,4 @@
 include "config.pil";
-include "xor.pil";
 
 // TODO: Check that period is correct
 namespace LFSR(%N);
@@ -8,6 +7,10 @@ namespace LFSR(%N);
     pol commit xor;
 
     pol constant ISBEFORELAST;   // 0, 0, ..., 0, 1, 0
+
+    // A table with all the xors of bits up to 2^N
+    pol constant INPUT0, INPUT1, INPUT2, INPUT3, INPUT4, INPUT5, INPUT6, INPUT7, INPUT8, INPUT9;
+    pol constant OUTPUT;
 
     taps[0] * (1 - taps[0]) = 0;
     taps[1] * (1 - taps[1]) = 0;
@@ -68,5 +71,4 @@ namespace LFSR(%N);
 
     {taps[0]*state[0], taps[1]*state[1], taps[2]*state[2], taps[3]*state[3], taps[4]*state[4], 
      taps[5]*state[5], taps[6]*state[6], taps[7]*state[7], taps[8]*state[8], taps[9]*state[9], xor} in 
-    {XOR.input0, XOR.input1, XOR.input2, XOR.input3, XOR.input4, 
-     XOR.input5, XOR.input6, XOR.input7, XOR.input8, XOR.input9, XOR.output};
+    {INPUT0, INPUT1, INPUT2, INPUT3, INPUT4, INPUT5, INPUT6, INPUT7, INPUT8, INPUT9, OUTPUT};
