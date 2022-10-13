@@ -1,6 +1,5 @@
-include "config.pil";
+constant %N = 2**10;
 
-// TODO: Check that period is correct
 namespace LFSR(%N);
     pol commit taps[10];
     pol commit state[10];
